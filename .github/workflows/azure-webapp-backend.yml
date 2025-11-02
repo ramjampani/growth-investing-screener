@@ -2,37 +2,54 @@ name: Deploy Backend to Azure Web App
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    name: Build and Deploy FastAPI Backend to Azure
 
     steps:
-      - uses: actions/checkout@v4
+      # 1️⃣ Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Python
+      # 2️⃣ Set up Python (matches Azure App Service runtime)
+      - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      # 3️⃣ Install dependencies
+      - name: Install backend dependencies
         run: |
           cd backend
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # ✅ Single Azure Login using Service Principal (AZURE_CREDENTIALS secret)
+      # 4️⃣ Make sure startup.sh is executable
+      - name: Make startup script executable
+        run: chmod +x backend/startup.sh
+
+      # 5️⃣ Azure login using Service Principal credentials
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # ✅ Deploy backend folder to your Azure Web App
+      # 6️⃣ Deploy backend folder to Azure Web App
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
           app-name: growth-invest-api
           slot-name: production
-          package: .
+          package: ./backend
+
+      # 7️⃣ Post-deployment verification (optional)
+      - name: Verify deployment
+        run: |
+          echo "✅ Deployment complete!"
+          echo "You can test your API at:"
+          echo "https://growth-invest-api-ggftenfffjgxdbce.centralindia-01.azurewebsites.net/api/top-stocks"
 
