@@ -1,11 +1,12 @@
 #!/bin/bash
 
 cd /home/site/wwwroot/backend
-echo "Starting FastAPI app from $(pwd)..."
+echo "📢 Working directory: $(pwd)"
+echo "✅ Starting FastAPI: main:app"
 
-# Ensure proper permissions
+# Ensure proper permissions (in case of redeploy)
 chmod +x /home/site/wwwroot/backend/startup.sh
 
-# Run FastAPI app with Uvicorn
-uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
+# Run FastAPI with correct working directory
+exec uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
 
