@@ -34,5 +34,5 @@ jobs:
         with:
           app-name: growth-invest-api
           slot-name: production
-          package: ./backend
+          package: .
 
