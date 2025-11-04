@@ -6,7 +6,7 @@ export default function App(){
 
   const API_URL = import.meta.env.DEV
     ? 'http://127.0.0.1:8000/api/top-stocks'
-    : 'https://growth-invest-api-ggftenfffjgxdbce.centralindia-01.azurewebsites.net';
+    : 'https://growth-invest-api-ggftenfffjgxdbce.centralindia-01.azurewebsites.net/api/top-stocks';
 
   useEffect(()=>{
     fetch(API_URL)
