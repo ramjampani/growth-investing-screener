@@ -6,6 +6,12 @@ import os
 
 app = FastAPI(title="Growth Investing Screener API - Demo")
 
+
+origins = [
+    "https://purple-forest-0a8652500.3.azurestaticapps.net",  # Azure Static Web App
+    "http://localhost:3000",  # For local dev testing
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
