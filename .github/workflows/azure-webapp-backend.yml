@@ -44,7 +44,7 @@ jobs:
         with:
           app-name: growth-invest-api
           slot-name: production
-          package: ./backend
+          package: .
 
       # 7️⃣ Post-deployment verification (optional)
       - name: Verify deployment
