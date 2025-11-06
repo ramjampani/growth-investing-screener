@@ -8,7 +8,7 @@ export default function AiRecommendations() {
   const [recs, setRecs] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/recommendations?risk=moderate`)
+    fetch(`${API_BASE}/api/recommendations?risk=low`)
       .then(res => res.json())
       .then(setRecs);
   }, []);
