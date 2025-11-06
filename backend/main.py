@@ -70,6 +70,11 @@ def recommendations(risk: str = Query("moderate", enum=["low", "moderate", "high
         enriched_funds.append(f)
 
     ranked = sorted(enriched_funds, key=lambda x: x["AI Score"], reverse=True)
-    if risk == "low": return ranked[:5]
-    if risk == "moderate": return ranked[5:10]
-    return ranked[10:15]
+    if risk == "low": 
+        return ranked[:5]
+    elif risk == "moderate":
+        return ranked[5:10]
+    else:
+    # "high" or anything else
+        return ranked[10:15]
+
