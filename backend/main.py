@@ -24,7 +24,7 @@ with open(DATA_PATH, "r") as f:
 
 def normalize(col):
     vals = np.array([f.get(col) or 0 for f in FUNDS])
-    return (vals - vals.min()) / (vals.ptp() + 1e-9)
+    return (vals - vals.min()) / (np.ptp(vals) + 1e-9)
 
 @app.get("/")
 def root():
